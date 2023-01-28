@@ -24,4 +24,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('posts/create', 'PostConroller@create');
+Route::get('/posts/create', 'App\Http\Controllers\CreatePostController@create');
+Route::get('/posts/create2', 'App\Http\Controllers\CreatePostController@createGallery');
+Route::post('/posts/store', 'App\Http\Controllers\CreatePostController@store');
+Route::post('/posts/storeGallery', 'App\Http\Controllers\CreatePostController@storeGallery');
+
+Route::get('/posts/all', 'App\Http\Controllers\PostController@showall');
+Route::get('/posts/{post}', 'App\Http\Controllers\PostController@show');
+
