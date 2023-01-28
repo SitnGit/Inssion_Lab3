@@ -13,10 +13,20 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('posts')) {
+            Schema::create('posts', function (Blueprint $table) {
+                $table->id();
+
+                $table->string('title');
+                $table->longText('content');
+                $table->string('image');
+
+                $table->integer('user_id')->unsigned()->index()->comment('author of the post');
+                $table->foreign('user_id')->references('id')->on('users');
+
+                $table->timestamps();
+            });
+        }
     }
 
     /**
